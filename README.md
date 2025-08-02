@@ -80,28 +80,34 @@ Diseñar e implementar una estrategia de **despliegue continuo y monitoreo** par
 
 ---
 
-## 📂 Estructura del proyecto
+# 🚀 Evaluación M7 DevOps – Luis Montero
 
-Evaluacion_M7_DevOps_LuisMontero/
-├── app/
-│ └── Main.java # Aplicación Java simple
-├── Dockerfile # Imagen Docker con OpenJDK
-├── README.md # Este documento
-├── helm-chart/
-│ ├── Chart.yaml # Metadata de Helm
-│ ├── values.yaml # Configuraciones
-│ └── templates/
-│ ├── deployment.yaml # Despliegue K8s
-│ └── service.yaml # Exposición del servicio
-└── .github/
-└── workflows/
-└── deploy.yml # GitHub Actions Workflow
-
-yaml
+Proyecto de evaluación para el Módulo 7 del curso de DevOps. Este proyecto consiste en una aplicación Java simple desplegada utilizando Docker, Kubernetes (via Helm), y GitHub Actions para CI/CD, con monitoreo y notificaciones integradas.
 
 ---
 
-## 🧪 Cómo ejecutar
+## 📂 Estructura del Proyecto
+
+```
+Evaluacion_M7_DevOps_LuisMontero/
+├── app/
+│   └── Main.java            # Aplicación Java simple
+├── Dockerfile               # Imagen Docker con OpenJDK
+├── README.md                # Este documento
+├── helm-chart/
+│   ├── Chart.yaml           # Metadata de Helm
+│   ├── values.yaml          # Configuraciones
+│   └── templates/
+│       ├── deployment.yaml  # Despliegue K8s
+│       └── service.yaml     # Exposición del servicio
+└── .github/
+    └── workflows/
+        └── deploy.yml       # GitHub Actions Workflow
+```
+
+---
+
+## 🧪 Cómo Ejecutar
 
 ### 🔧 Localmente (Java)
 
@@ -110,7 +116,59 @@ javac app/Main.java
 java -cp app Main
 ```
 
+### 🐳 Docker
+
+```bash
+docker build -t porttrack .
+docker run porttrack
+```
+
+### ☸️ Kubernetes + Helm
+
+```bash
+helm install porttrack ./helm-chart
+kubectl get pods
+kubectl get svc
+```
+
+**Rollback en caso de error:**
+
+```bash
+helm rollback porttrack
+```
+
 ---
 
+## 🔁 GitHub Actions CI/CD
+
+El flujo de CI/CD se activa automáticamente al hacer `push` a la rama `main`.
+
+Incluye:
+
+- ✅ Build de imagen Docker
+- ✅ Push a GitHub Container Registry (GHCR)
+- ✅ Despliegue en clúster Kubernetes usando Helm
+- ✅ Notificación a Slack
+
+---
+
+## 📊 Monitoreo y Alertas
+
+- **Prometheus** y **Grafana** recolectan y visualizan métricas.
+- Dashboards disponibles en: [`http://localhost:3000/grafana`](http://localhost:3000/grafana)
+- Alertas automáticas enviadas a Slack ante errores o uso excesivo de recursos.
+
+---
+
+## 🤖 ChatOps
+
+- Webhook de Slack configurado para enviar notificaciones automáticas.
+- Integración futura con **Hubot** para permitir comandos como `deploy` o `rollback` vía chat.
+
+---
+
+## 📄 Licencia
+
+MIT © 2025 Luis Montero
 
 
