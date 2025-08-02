@@ -170,5 +170,3 @@ Incluye:
 ## 📄 Licencia
 
 MIT © 2025 Luis Montero
-
-
